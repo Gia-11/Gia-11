@@ -2,7 +2,7 @@
     background-image: url(./images/pattern.jpeg.png);
     background-size: cover;
     background-position: bottom center;
-    height: 700px;
+    height: 150px;
     width: 100%;
   }
   
@@ -10,8 +10,9 @@
     border: 3px solid white;
     position: relative;
     top: 50px;
-    width: 400px;
+    width: 500px;
     margin: 0 auto;
+    text-align: center;
   }
 
   h1 {
