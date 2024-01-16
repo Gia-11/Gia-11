@@ -53,3 +53,34 @@ footer {
 }
 
 footer small {display: block; padding-top: 30px; text-align: center;}
+
+/* Media Query - Breakpoint for Tablets at 1024px */
+@media only screen and  (min-width: 641px) and (max-width: 1024px)
+{
+    header h1 {font-size: 260%;}
+
+    section {width: 44%; padding: 3%;}
+    section h2 {font-size: 140%;}
+    section p {font-size: 105%;}
+
+    aside {width: 44%; padding: 3%;}
+    aside h2 {font-size: 140%;}
+    aside p {font-size: 105%;}
+
+    #adblock {width: 90%; padding-bottom: 60%;}
+}
+
+/* Media Query - Breakpoint for Smartphones between 320px and 640px */
+@media only screen and  (min-width: 320px) and (max-width: 640px)
+{
+    header h1 {font-size: 250%;}
+
+    section {width: 94%;clear: both; padding: 3%;}
+    section h2 {font-size: 140%;}
+    section p {font-size: 105%;}
+
+    aside {width: 94%;float: left; padding: 3%; clear: both;}
+    aside h2 {font-size: 140%;}
+    aside p {font-size: 105%;}
+}
+
