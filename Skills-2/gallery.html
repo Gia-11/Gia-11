@@ -25,7 +25,7 @@
 	position: absolute;
 }
 </style>
-<script src="../_js/jquery.min.js"></script>
+<script src="_js/jquery.min.js"></script>
 <script>
 $(document).ready(function() {
 		
@@ -46,8 +46,21 @@ $('#gallery img').each(function(i) {
 }); // end each
 	
 //insert new programming below this line
-	
-	
+$('#gallery a').click(function(evt) {
+	evt.preventDefault();
+	var imgPath = $(this).attr('href');
+	var oldImage = $('#photo img');
+	var newImage = $('<img src="' + imgPath +'">');
+	newImage.hide();
+	$('#photo').prepend(newImage);
+	newImage.fadeIn(1000);
+	oldImage.fadeOut(1000,function(){
+		$(this).remove();
+	}); // end fadeout
+}); // end click
+$('#gallery a:first').click();
+
+
 }); // end ready
 </script>
 </head>
