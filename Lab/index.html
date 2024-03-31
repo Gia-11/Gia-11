@@ -11,14 +11,24 @@
 <script src="smartmenus/jquery.smartmenus.min.js"></script>
 
 <script>
+$(document).ready(function() {
+  $('.sm').smartmenus({
+    showFunction: function($ul, complete) {
+      $ul.slideDown(250, complete);
+    },
+    hideFunction: function($ul, complete) {
+      $ul.slideUp(250, complete);
+    }
 
+  }); // end smartmenus
+}); // end ready
 </script>
 </head>
 
 <body>
 <div class="wrapper">
   <header>
-    MENU : THE&nbsp;EXTRA EXCESSIVE&nbsp;MENU
+    THE&nbsp;EXTRA EXCESSIVE&nbsp;MENU
   </header>
       <h1>Navigation Topics</h1>
       <ul class="sm sm-blue">
