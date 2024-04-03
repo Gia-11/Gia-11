@@ -12,6 +12,7 @@
 
 <script>
 $(document).ready(function() {
+	$('#signup').validate();
 
 }); // end ready
 </script>
@@ -27,7 +28,8 @@ $(document).ready(function() {
 		<form action="process.html" method="post" name="signup" id="signup">
 			<div>
 				<label for="name" class="label">Name </label>
-				<input name="name" type="text" id="name" >
+				<input name="name" type="text" id="name"
+				class="required" title="Please type your name.">
 			</div>
 			<div>
 				<label for="email" class="label">E-mail Address</label>
