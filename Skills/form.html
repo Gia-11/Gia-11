@@ -12,8 +12,13 @@ $(document).ready(function() {
 		$('#creditCard input').prop('disabled', true)
 		                      .css('backgroundColor','#CCC');
 		$('#creditCard label').css('color','#BBB');
-
 	}); // end click
+	$('#visa, #mastercard').click(function() {
+		$('#creditCard input').prop('disabled', false)
+		                      .css('backgroundColor','');
+		$('#creditCard label').css('color','');
+	}); // end click
+
 }); // end ready
 </script>
 </head>
