@@ -18,8 +18,13 @@ $(document).ready(function() {
 				required: true,
 				email: true
 			}
-
-		} //end rules
+		}, //end rules
+		messages: {
+			email: {
+				required: "Please supply your e-mail address.",
+				email: "This is not a valid e-mail address."
+			}
+		} // end messages
 	}); // end validate()
 
 }); // end ready
