@@ -12,7 +12,15 @@
 
 <script>
 $(document).ready(function() {
-	$('#signup').validate();
+	$('#signup').validate( {
+		rules: {
+			email: {
+				required: true,
+				email: true
+			}
+
+		} //end rules
+	}); // end validate()
 
 }); // end ready
 </script>
