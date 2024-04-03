@@ -17,6 +17,12 @@ $(document).ready(function() {
 			email: {
 				required: true,
 				email: true
+			}, 
+			password: {
+				required: true,
+			},
+			confirm_password: {
+				equalTo:'#password'
 			}
 		}, //end rules
 		messages: {
