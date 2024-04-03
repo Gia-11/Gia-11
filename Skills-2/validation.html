@@ -20,6 +20,7 @@ $(document).ready(function() {
 			}, 
 			password: {
 				required: true,
+				rangelength:[8,16]
 			},
 			confirm_password: {
 				equalTo:'#password'
