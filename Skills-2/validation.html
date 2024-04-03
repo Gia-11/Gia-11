@@ -72,7 +72,8 @@ $(document).ready(function() {
 				<input name="confirm_password" type="password" id="confirm_password">
 			</div>
 			<div><span class="label">Hobbies</span>
-				<input name="hobby" type="checkbox" id="heliskiing" value="heliskiing">
+				<input name="hobby" type="checkbox" id="heliskiing" value="heliskiing" class="required" title="Please check at least 1
+				hobby.">
 				<label for="heliskiing">Heli-skiing</label>
 				<input name="hobby" type="checkbox" id="pickle" value="pickle">
 				<label for="pickle">Pickle eating</label>
@@ -102,7 +103,8 @@ $(document).ready(function() {
 			</div>
 			<div class="labelBlock">Would you like to receive annoying e-mail from us? </div>
 			<div class="indent">
-				<input  type="radio" name="spam" id="yes" value="yes">
+				<input  type="radio" name="spam" id="yes" value="yes"
+				class="required" title="Please select an option">
 				<label for="yes">Yes</label>
 				<input type="radio" name="spam" id="definitely" value="definitely">
 				<label for="definitely">Definitely</label>
