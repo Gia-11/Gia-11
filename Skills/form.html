@@ -18,7 +18,13 @@ $(document).ready(function() {
 		                      .css('backgroundColor','');
 		$('#creditCard label').css('color','');
 	}); // end click
-
+	$('#hideShip').click(function() {
+		if ($(this).prop('checked')) {
+			$('#shipping').slideUp('fast');
+		} else {
+			$('#shipping').slideDown('fast');
+		}
+	}); // end click
 }); // end ready
 </script>
 </head>
