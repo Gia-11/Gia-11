@@ -8,7 +8,12 @@
 <script>
 $(document).ready(function() {
 	$(':text:first').focus();
+	$('#paypal').click(function() {
+		$('#creditCard input').prop('disabled', true)
+		                      .css('backgroundColor','#CCC');
+		$('#creditCard label').css('color','#BBB');
 
+	}); // end click
 }); // end ready
 </script>
 </head>
