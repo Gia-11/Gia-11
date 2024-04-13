@@ -9,7 +9,15 @@
 <script src="_js/jquery-ui.min.js"></script>
 <script>
 $(document).ready(function() {
-
+	$$('#accordion').accordion({
+  active: false,
+  collapsible: true,
+  icons : {
+    header: 'ui-icon-circle-plus',
+    activeHeader: 'ui-icon-circle-minus'
+  },
+  animate: false
+});
 }); // end ready
 </script>
 </head>
@@ -21,8 +29,8 @@ $(document).ready(function() {
 	<div class="content">
 		<div class="main">
 			<h1>jQuery UI Accordion</h1>
-			 <div id="accordion">
-			  <h2>What the Robot Says</h2>
+			<div id="accordion">
+				<h2>What the Robot Says</h2>
 				<div>
 				  <h3><img src="images/robot.jpg" style="float:right" height="150" alt="robot">Content for accodion 1</h3>
 				  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
@@ -46,6 +54,7 @@ $(document).ready(function() {
 			</div>
   </div>
 	</div>
+
 	<footer>
 		<p>Pate WK7 Skill Builder Accordion </p>
 	</footer>
