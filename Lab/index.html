@@ -33,6 +33,7 @@
         img {
             width: 50px;
         }
+        /* CSS animations */
         #a1 { animation: move1 5s 3;}
         @keyframes move1 {
             0% { transform: translateX(0px);}
@@ -53,7 +54,24 @@
             75% {transform: translate(-500px) rotate(-360deg);}
             100% {transform: translate(Opx) rotate(0deg);}
         }
-
+        /* CSS transitions */
+        #t1 { transition: transform 1s;}
+        #t1:hover {
+            cursor: pointer;
+            transform: rotateX(145deg);
+        }
+        #t2 { transition: transform 1s;}
+        #t2:hover {
+            cursor: pointer;
+            transform: rotateZ(225deg) scale(.8);
+        }
+        #t3 {
+            transition: transform 0.5s;
+        }
+        #t3:hover {
+            cursor: pointer;
+            transform: rotateY(145deg) scale(1.1);
+        }
     </style>
 </head>
 
