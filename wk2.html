@@ -79,6 +79,39 @@
     filter: drop-shadow(8px 8px 5px gray);
 }
 
+/* CSS for Button 3 */
+#btn3 {
+    width: 55px;
+    height: 55px;
+    display: inline-block;
+    background-color: cornflowerblue;
+
+    transition: all 0.1s ease-in-out;
+    transform: translate3D(0, 0, 0); /* translate3D (0,0,0) causing the browser to send this work to the GPU if possible */
+}
+
+#btn3:hover {
+    cursor: pointer;
+    filter: drop-shadow(8px 8px 5px gray);
+}
+
+/* CSS for Button 4 */
+#btn4 {
+    width: 55px;
+    height: 55px;
+    display: inline-block;
+    background-color: cornflowerblue;
+
+    transition: all 0.1s ease-in-out;
+    transform: translate3D(0, 0, 0); /* translate3D (0,0,0) causing the browser to send this work to the GPU if possible */
+}
+
+#btn4:hover {
+    cursor: pointer;
+    filter: drop-shadow(8px 8px 5px gray);
+}
+
+
         
     </style>
  
@@ -91,6 +124,8 @@
         <div class="transitions">
             <div id="btn1"></div>   
             <div id="btn2"></div>
+            <div id="btn3"></div>
+            <div id="btn4"></div>
             
         </div>
  
