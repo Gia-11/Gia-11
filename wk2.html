@@ -104,7 +104,7 @@
     background-color: cornflowerblue;
 
     transition: all 0.1s ease-in-out;
-    transform: rotateX(180deg); /* translate3D (0,0,0) causing the browser to send this work to the GPU if possible */
+    transform: translate3D(0, 0, 0); /* translate3D (0,0,0) causing the browser to send this work to the GPU if possible */
 }
 
 #btn4:hover {
