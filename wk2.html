@@ -55,7 +55,7 @@
     background-color: cornflowerblue;
  
     transition: all 0.1s ease-in-out;
-    transform: translate3D(0, 0, 0);
+    transform: translate3D(0, 0, 0); /* translate3D (0,0,0) causing the browser to send this work to the GPU if possible */
 }
  
 #btn1:hover {
@@ -71,7 +71,7 @@
     background-color: cornflowerblue;
 
     transition: all 0.1s ease-in-out;
-    transform: translate3D(0, 0, 0);
+    transform: translate3D(0, 0, 0); /* translate3D (0,0,0) causing the browser to send this work to the GPU if possible */
 }
 
 #btn2:hover {
