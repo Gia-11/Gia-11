@@ -132,7 +132,7 @@
         transform: translate3d(0, 0, 0);
     }
     to {
-        transform: translate3d(0, 275px, 0);               
+        transform: translate3d(0, 275px, 0);  /* the translate3d(0,0,0) transform property, which ensures use of the GPU in the translation. We also only specify the change in the Y-direction only. So, down, then up. */             
     }
 }
     </style>
