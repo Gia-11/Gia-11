@@ -118,9 +118,23 @@
     height: 50px;
     border-radius: 50%;
     background-color: #FF5722;
-    display: inline-block;           
+    display: inline-block; 
+    /* ADD THESE LINES BELOW */
+    animation: bounce .5s;
+    animation-direction: alternate;      
+    animation-timing-function: cubic-bezier(.5, 0.05, 1, .5);
+    animation-iteration-count: infinite;          
 }
 
+/* Keyframes for bouncing ball */
+@keyframes bounce {
+    from {
+        transform: translate3d(0, 0, 0);
+    }
+    to {
+        transform: translate3d(0, 275px, 0);               
+    }
+}
     </style>
  
 </head>
