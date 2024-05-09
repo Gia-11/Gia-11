@@ -107,13 +107,20 @@
     transform: translate3D(0, 0, 0); /* translate3D (0,0,0) causing the browser to send this work to the GPU if possible */
 }
 
+/* CSS for the Ball */
 #btn4:hover {
     cursor: pointer;
     filter: opacity(30%); /* changed opacity */
 }
 
+#ball {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #FF5722;
+    display: inline-block;           
+}
 
-        
     </style>
  
 </head>
@@ -127,14 +134,13 @@
             <div id="btn2"></div>
             <div id="btn3"></div>
             <div id="btn4"></div>
-            
         </div>
  
         <div class="separator"></div>
  
         <h2>Movement Effects</h2>
         <div class="animations">
-           
+            <div id="ball"></div>
         </div>
  
     </div>
