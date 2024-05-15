@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Example DOM Methods</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <style>
+        body {
+            margin: 25px;
+        }
+        #myForm {                  
+            width: 550px;  
+            display: none;  /* Add this */ 
+            position: fixed;                 
+            z-index: 1;          /* Sit on top */           
+            top: 75px;
+            left: 150px;
+            width: 70%;                         
+            overflow: auto;     /* Enable scroll if needed */         
+            animation: animatetop 0.2s ease-out;            
+        }
+
+       #close, #main,
+        h2 {
+            display: inline-block;
+        }
+        img{
+            width: 350px;
+            margin-right: 15px;
+            padding: 15px;
+            float:left;
+        }  
+        
+        /* added to smooth out the animatetop rule */
+        @keyframes animatetop {
+    from {
+        top: -100px;
+        opacity: 0;
+    }
+    to {
+        top: 75px;
+        opacity: 1
+    }
+}
+    </style>  
+    
+    <!-- In this example, a JavaScript function is placed in the <head> section of an HTML page. 
+        The function is invoked (called) when a button is clicked: -->
+    <script>
+        window.onload = function() {
+            console.log("document.onload", Date.now());
+     
+            var myBtn = document.querySelector("#myBtn");
+            myBtn.addEventListener("click", openForm, false);
+     
+            var close = document.querySelector("#close");
+            close.addEventListener("click", closeMe, false);
+     
+            var myForm = document.querySelector("#myForm");
+     
+            function openForm() {
+                //Unhide form
+                myForm.style.display = "block";
+            }
+     
+            function closeMe() {
+                //Hide form
+                myForm.style.display = "none";
+            }
+        }
+    </script>
+</head>
+
+<body>
+
+    <h1>Example Popup Form</h1>
+    <button id="myBtn" class="w3-btn w3-round-large w3-blue">Click me</button><br><br>
+    <div id="main">        
+        <p><img class="w3-image w3-card" src="images/w_Wild-Horses-1.png"> Niz Krouer gwir ret perc'henn jod koulz ha mil gwalc'hiñ ali tri-ugent 
+            c'hoarvezout eus fraoñval mar ti beuziñ nec'hin hent-houarn, aes munutenn mae 
+            mantell, aon arabat digempenn hag pennad aes santout niz kustum, dre nevez 
+            bruched teñvalijenn. Lunedoù piz ober eo mat pegeit don moereb.    </p>
+        <p>Kêr las poull-kalon kig ar gwellañ Kembre poan grizilh froud. Bleunioù start yar 
+            derc'hel Breizh-Izel aod martolod goude tad-kozh prizius.   </p>
+        <p>Pal koulskoude he ar gwellañ. Kaoued tachenn eta Gwengamp. Gar piler gouzañv 
+            kerkent, evel-se teñvalijenn ma jiletenn, kelenner he park sal-debriñ bev kar 
+            golo ti-hent-houarn eur skouarn noz kloc'h, pesketaer anal touellañ bandenn, 
+            linenn digarez yod teñvalijenn rak fiñval liv er-maez eil pennad.  </p>
+    </div>
+
+    <div id="myForm" class="w3-card w3-padding w3-border w3-round-xlarge w3-yellow">
+        <h2>Input Form</h2>
+        <div id="close" class="w3-btn w3-right w3-round-large w3-red">X</div>
+        <form action="#" method="post">
+            <input class="w3-input" type="text">
+            <label>First Name</label>
+            <input class="w3-input" type="text">
+            <label>Last Name</label>
+        </form>
+    </div>
+
+</body>
+
+</html>
+
+
