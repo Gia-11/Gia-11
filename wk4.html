@@ -21,11 +21,9 @@
             list-style-type: none;
             margin: 0;
             padding: 0;
-            overflow: hidden;
-            width: 99%;
         }
         li {
-            float: left;
+            float: none;
         }
         li a {
             font-size: 1 em;
@@ -34,14 +32,30 @@
             font-family: sans-serif;
             color:white;
         }
-        #nav {
-            display: block;
-            border: 1px solid gray;
-            border-radius: 10px;
-            margin: 0 auto;
-            padding: 10px;
-            background-color:darkgreen;
-        }
+
+        /* CSS new rules for rules to control the "X" close icon in the menu */
+        li#close{
+    padding: 8px;
+    color: white;
+}
+ 
+li#close:hover{
+    cursor:pointer;
+    color:red;
+}
+
+/* CSS new rules for NAV */
+#nav {
+    display: none;    /* normally hidden */
+    width: 25%;       /* set width to 25% of screen width - responsive */
+    left: 0;          /* start at absolute left */
+    position: fixed;  /* want the menu to remain fixed, even during scrolling */
+    z-index: 3;       /* ensure it is on top */
+    border: 1px solid gray; 
+    border-radius: 10px; /* rounded corners for border */
+    background-color: darkgreen;
+    height: 100%;     /* ensure it covers entire left side to bottom */
+}
 
          /* CSS for Hamburger Menu */
         .menu{
