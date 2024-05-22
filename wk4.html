@@ -57,6 +57,19 @@ li#close:hover{
     height: 100%;     /* ensure it covers entire left side to bottom */
 }
 
+/* CSS Class and NAV animation */
+.nav{
+   position:relative;
+   animation:animateleft 0.4s;
+}
+@keyframes animateleft{from{left:-300px;opacity:0} to{left:0;opacity:1}}
+
+/* CSS for animation */
+#main{
+    margin-left: 0;
+    transition: all 0.3s ease-out;
+}
+
          /* CSS for Hamburger Menu */
         .menu{
     font-size: 2em;           
@@ -132,7 +145,7 @@ p a:hover {
     <div id="myMenu" class="menu"> ≡ </div> <!-- Place a hamburger menu icon at top left of screen. -->
     <!--this symbol ≡ is found as ALT-240 on your keyboard -->
     <!--    Navigation section-->
-    <div id="nav">
+    <div class="nav" id="nav">
         <ul>
             <li id="close">X</li>  <!--this gives us "close" icon for the menu when it is open -->
             <li><a href="#home">Home</a></li>
