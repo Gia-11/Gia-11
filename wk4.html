@@ -43,6 +43,20 @@
             background-color:darkgreen;
         }
 
+         /* CSS for Hamburger Menu */
+        .menu{
+    font-size: 2em;           
+    position: fixed; /* needed to stay in one place */
+    z-index: 3;      /* needed to keep this in front of scrolling content */
+    padding: 5px;
+    transition: all .1s ease-out; /* control the animation of the hover effect */
+}
+.menu:hover{
+    color:deeppink; /* change text color on hover */
+    cursor: pointer; /* Chnage cursoe to pointer on hover */            
+    transform: scale(1.5);  /* scale icon 1.5 times on hover */
+}
+
         /* CSS for body links */
 p a {
     font-family: sans-serif;
@@ -73,15 +87,18 @@ p a:hover {
 
 <body>
     <div id="myMenu" class="menu"> ≡ </div> <!-- Place a hamburger menu icon at top left of screen. -->
+    <!--this symbol ≡ is found as ALT-240 on your keyboard -->
     <!--    Navigation section-->
     <div id="nav">
         <ul>
+            <li id="close">X</li>  <!--this gives us "close" icon for the menu when it is open -->
             <li><a href="#home">Home</a></li>
             <li><a href="#news">News</a></li>
             <li><a href="#contact">Contact</a></li>
             <li><a href="#about">About</a></li>
         </ul>
     </div>
+    <div id="main">  <!--add this line-->
     <div id="banner">
         <img id="logo" src="images/logo.png" alt="logo image of horse">
     </div>
@@ -185,6 +202,7 @@ p a:hover {
         marc'h bihan, lenn daoust ha gourc'hemennoù. Kig kroaz rev merkañ. Lonkañ 
         dilhad-gwele kardeur doñjer tec'hout liv giz ki teñvalijenn. Tiegezh ni bras 
         tiegezh. Paotr kêr gar divjod dimeurzh.</p>
+    </div>          <!--add this line-->
 </body>
 
 </html>
