@@ -353,6 +353,36 @@ img.onload = function() {
  ctx.fillStyle = "#ffffff";
  ctx.fillText("Ride On!", 0, 0);
  ctx.restore(); 
+
+     // Add Line Drawings
+     var startX = 700;
+var startY = 45;
+ 
+ctx.strokeStyle = "#ffffff";
+ 
+ctx.beginPath();
+ctx.lineWidth = 3;
+ctx.moveTo(startX,startY);
+ctx.lineTo(startX - 50, startY + 30);
+ctx.stroke();
+ 
+ctx.beginPath();
+ctx.moveTo(startX,startY);
+ctx.lineWidth = 5;
+ctx.lineTo(startX + 15, startY + 15);
+ctx.stroke();
+ 
+ctx.beginPath();
+ctx.lineWidth = 3;
+ctx.moveTo(startX + 50,startY);
+ctx.lineTo(startX, startY + 30);
+ctx.stroke();
+ 
+ctx.beginPath();        
+ctx.moveTo(startX + 50,startY);
+ctx.lineWidth = 5;
+ctx.lineTo(startX + 65, startY + 15);     
+ctx.stroke(); 
     }
 </script>
 </head>
