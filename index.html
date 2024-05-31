@@ -1,313 +1,105 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title> Pate Week 4 Lab </title>
+    <title>Canvas Examples</title>
     <style>
-        body {
-            margin-left: 15px;
-            font-family: sans-serif;
-            font-size: 1.3em;
-           
+        #canvas {            
+            border: 3px solid green;
+            border-radius: 10px; 
         }
-        html{
-    scroll-behavior: smooth;
-}
-        #logo{           
-            width: 100%;
-            position: relative;
+        footer {
+         background-color: green;
+         color: white;
+         text-align: center;
+         padding: 10px;
+         position: fixed;
+         bottom: 0;
+         width: 100%;
         }
-        ul {
-            list-style-type: none;
-            margin: 0;
-            padding: 0;
-        }
-        li {
-            float: none;
-        }
-        li a {
-            font-size: 1 em;
-            display: block;
-            padding: 8px;
-            font-family: sans-serif;
-            color:white;
-        }
-
-        /* CSS new rules for rules to control the "X" close icon in the menu */
-        li#close{
-    padding: 8px;
-    color: white;
-}
- 
-li#close:hover{
-    cursor:pointer;
-    color:red;
-}
-
-/* CSS new rules for NAV */
-#nav {
-    display: none;    /* normally hidden */
-    width: 25%;       /* set width to 25% of screen width - responsive */
-    left: 0;          /* start at absolute left */
-    position: fixed;  /* want the menu to remain fixed, even during scrolling */
-    z-index: 3;       /* ensure it is on top */
-    border: 1px solid gray; 
-    border-radius: 10px; /* rounded corners for border */
-    background-color: darkgreen;
-    height: 100%;     /* ensure it covers entire left side to bottom */
-}
-
-/* CSS Class and NAV animation */
-.nav{
-   position:relative;
-   animation:animateleft 0.4s;
-}
-@keyframes animateleft{from{left:-300px;opacity:0} to{left:0;opacity:1}}
-
-/* CSS for animation */
-#main{
-    margin-left: 0;
-    transition: all 0.3s ease-out;
-}
-
-         /* CSS for Hamburger Menu */
-        .menu{
-    font-size: 2em;           
-    position: fixed; /* needed to stay in one place */
-    z-index: 3;      /* needed to keep this in front of scrolling content */
-    padding: 5px;
-    transition: all .1s ease-out; /* control the animation of the hover effect */
-}
-.menu:hover{
-    color:deeppink; /* change text color on hover */
-    cursor: pointer; /* Chnage cursoe to pointer on hover */            
-    transform: scale(1.5);  /* scale icon 1.5 times on hover */
-}
-
-/* CSS for scroll button */
-.myBtn {
-   /* display: none;     comment this out at first*/
-    position: fixed;
-    bottom: 20px;
-    right: 30px;
-    z-index: 99;
-    font-size: 18px;
-    border: none;
-    outline: none;
-    background-color: red;
-    color: white;
-    cursor: pointer;
-    padding: 15px;
-    border-radius: 4px;
-}
- 
-.myBtn:hover {
-    background-color: #555;
-}
-
-        /* CSS for body links */
-p a {
-    font-family: sans-serif;
-    font-size: 1em;
-    color:darkgreen;
-    text-decoration:underline;
-    text-decoration-style: dotted;
-    text-decoration-color: darkgreen;
-    transition: all .2s ease-out;
-    padding: 3px;
-    background: linear-gradient(to bottom,
-        rgba(255, 194, 102, 0) 0%,
-        rgba(255, 194, 102, 0) 50%,
-        rgba(255, 194, 102, 1) 50%,
-        rgba(255, 194, 102, 1) 100%);
-    background-repeat: no-repeat;
-    background-size: 100% 200%;
- 
-}
- 
-p a:hover {
-    color:black;
-    background-position: 0 100%;
-}
-
     </style>
 
-<!-- JavaScript for body links -->
 <script>
     window.onload = function() {
-        // Get pointers to all IDs we wish to control
-        var main = document.querySelector("#main");
-        var myMenu = document.querySelector("#myMenu");
-        var close = document.querySelector("#close");
-        var nav = document.querySelector("#nav");
+        var canvas = document.querySelector("#canvas");
+        var ctx = canvas.getContext('2d');
+        //Rectangle with gradient
+    ctx.beginPath();
  
-        myMenu.addEventListener("click", openMenu, false);
-        close.addEventListener("click", closeMe, false);
- 
-        function openMenu() {
-            // Unhide nav
-            nav.style.display = "block";
-            myMenu.style.display = "none";
-            main.style.marginLeft = "25%";
-        }
- 
-        function closeMe() {
-            // Hide nav
-            nav.style.display = "none";
-            myMenu.style.display = "block";
-            main.style.marginLeft = "0";
-        }
-    }
- 
-</script>
+ // Create gradient
+ var grd = ctx.createLinearGradient(0, 0, 1000, 300);
+ grd.addColorStop(0, "#ffffff");
+ grd.addColorStop(1, "#a3c2c2");
 
-<script>
-    // JavaScript for Scroll Events
-    // When the user scrolls down 25px from the top of the document, show the button
-window.onscroll = function() {
-    scrollFunction()
-};
- 
-function scrollFunction() {
-    if (document.body.scrollTop > 25 || document.documentElement.scrollTop > 25) {
-        document.getElementById("myBtn").style.display = "block";                
-    } else {
-        document.getElementById("myBtn").style.display = "none";                
-    }
-}
- 
-// When the user clicks on the button, scroll to the top of the document
-function topFunction() {
-    document.body.scrollTop = 0;
-    document.documentElement.scrollTop = 0;
+ // Fill with gradient
+ ctx.fillStyle = grd;
+ ctx.fillRect(0, 0, 1000, 300);
+
+// Drawing the Image
+ var img = new Image(400, 320);
+img.src = "images/horse.png";
+img.onload = function() {
+    ctx.beginPath();                              
+    ctx.drawImage(img, 0, -10);
+    ctx.drawImage(img, 350, 110, 200,175);                
+    ctx.drawImage(img, 500, 130, 200,175);                
+   
 }
 
+ // Drawing the Text
+ ctx.font = 'italic 48px arial';
+ ctx.fillStyle = "rgba(50,50,50, 0.5)";
+ ctx.fillText('The Steeds of Rivendell', 203, 152);
+ ctx.fillStyle = "#669966";
+ ctx.fillText('The Steeds of Rivendell', 200, 150);                  
+ 
+ ctx.save();
+ ctx.translate(920,70);
+ ctx.rotate(Math.PI / 2);
+ ctx.font = 'bold 38px arial';
+ ctx.textAlign = "left";
+ ctx.fillStyle = "rgba(60,60,60, 0.8)";
+ ctx.fillText("Ride On!", -2, -2);
+ ctx.fillStyle = "#ffffff";
+ ctx.fillText("Ride On!", 0, 0);
+ ctx.restore(); 
+
+     // Add Line Drawings
+ var startX = 700;
+ var startY = 45;
+ 
+ctx.strokeStyle = "#ffffff";
+ 
+ctx.beginPath();
+ctx.lineWidth = 3;
+ctx.moveTo(startX,startY);
+ctx.lineTo(startX - 50, startY + 30);
+ctx.stroke();
+ 
+ctx.beginPath();
+ctx.moveTo(startX,startY);
+ctx.lineWidth = 5;
+ctx.lineTo(startX + 15, startY + 15);
+ctx.stroke();
+ 
+ctx.beginPath();
+ctx.lineWidth = 3;
+ctx.moveTo(startX + 50,startY);
+ctx.lineTo(startX, startY + 30);
+ctx.stroke();
+ 
+ctx.beginPath();        
+ctx.moveTo(startX + 50,startY);
+ctx.lineWidth = 5;
+ctx.lineTo(startX + 65, startY + 15);     
+ctx.stroke(); 
+    }
 </script>
 </head>
-
 <body>
-    <div id="myMenu" class="menu"> ≡ </div> <!-- Place a hamburger menu icon at top left of screen. -->
-    <!--this symbol ≡ is found as ALT-240 on your keyboard -->
-    <!--    Navigation section-->
-    <div class="nav" id="nav">
-        <ul>
-            <li id="close">X</li>  <!--this gives us "close" icon for the menu when it is open -->
-            <li><a href="#home">Home</a></li>
-            <li><a href="#news">News</a></li>
-            <li><a href="#contact">Contact</a></li>
-            <li><a href="#about">About</a></li>
-        </ul>
-    </div>
-    <div id="main">  <!--add this line-->
-    <div id="banner">
-        <img id="logo" src="images/logo.png" alt="logo image of horse">
-    </div>
-    <h2 id="home">Home </h2>
-    
-    <p>He gwener c'hoant, fellout ki eeun aval-douar. Liv gervel aval-douar respont,
-        daoulagad kurun niverenn. Karrezek da frouezh, medisin mat anal. Kompren forzh
-        penaos pal digalon. Ampart pesketa noz lec'h all mor pep kontañ kazetenn
-        Bro-C'hall. Biskoazh diskar-amzer nav war-dre re kar kontañ spi regiñ mor pod
-        yac'h skignañ c'hwezek, <a href="#">this is a link </a>kargañ gouzout aer amzer razh. Dale kar hon milin
-        digwener, kontrol glin stag tro kreiz, dor boull yaou golo chokolad liv biz nag
-        kerkoulz ha.</p>
-    <p>Gavr piz broustañ du yac'h, korn saveteiñ eus forzh penaos ler hini poazhañ ober
-        e venoz, doujañ bod doujañs, kaol yar adaozañ hol pluenn eñ aet feiz bodet
-        brezel trubard kêr pleg-mor sec'h Gwengamp dimeziñ, diskenn dont a-benn fur
-        sigaretenn. Pakañ deiz mat koulz-amzer, karr bandenn hol dianav kalz, tu disheol
-        c'hoar-gaer bez un tammig loar trouz war-dro mirout. Pal naontek dreist-holl.
-        Kaier eno pri koan pegoulz. Skrijañ mat gwir seblantout aer kig hir razh gouriz
-        arar. Ler hol doug-pluenn, per chom bod pobl, Gwengamp aes dorn loa eo Naoned
-        hag all. Genver reolenn karr-beajourien, kae keuz giz kegin me chase war kae
-        bras kenderv, te moulañ gwenodenn doug-pluenn, unan breur-kaer rak peurvuiañ du
-        Europa kêr paotred ken ivez, sklaer degemer a-wechoù, aet bleunioù ma keniterv.</p>
-    <h2 id="news">News </h2>
-    <p>Gant melezour giz dlead degas ya gwelloc'h pe warlene, kiger biz-meud kemener, 
-        piv hag c'hoarvezout. Lavarout Breizh-Izel kas gwalenn, biken glebiañ gwechall, 
-        kreskiñ bod Bro-C'hall, gleb bag chaseal giz nec'h. Gwalenn menez hini kar 
-        debriñ. Biskoazh chapel a-us da, c'hewz nav warc'hoazh. Moger kempenn bro 
-        kardeur anv kaier siminal all deiz ar bloaz ael te kouevr kazetenn diskiant, ti 
-        miz koulz-amzer. Traoñ gwalc'hiñ Mor Atlantel mat divskouarn dreist-holl e 
-        spontus.</p>
-    <p>Fazi ankouna'haat prenestr flamm gwelout, yen tal kerkoulz ha. <a href="#">this is a link </a> Alies ler 
-        niverenn bed kof kreiz gourc'hemenn tud pevarzek ler tremen niverenn ali tog 
-        kerc'hat tamm-ha-tamm anv kentañ skrijañ dir distreiñ, lonkañ disheol tra bennak 
-        noz loer gwelloc'h e siwazh goleiñ dra kelc'hiek mamm trugarez gwiskañ. Noazh 
-        mousc'hoarzhin distreiñ merenn gwelloc'h, yod mil sukr arc'hant. Landreger yen 
-        troad. Rev e-lec'h kêr e-keñver. Eoul e-barzh amanenn, laerezh oaled Nedeleg 
-        ober goap. Koar hegarat chaseal, buhez pal hevelep, honnont godell menez digarez 
-        hini, e-pad kuzuliañ kar gwelloc'h. Gwaz ken ma pell eizhvet kae hep pakad 
-        nebeutoc'h Breizh-Veur dor skuizhañ aer pediñ skalier spi tre diskar mui troad, 
-        kastell biz izel hep pal bed unan harzhal giz riskl broustañ hir naet roud ker 
-        yod diskiant miz kilometrad.</p>
-    <p>Enebour hol anal, elgez fiziañs forzh penaos, pevar piv lavarout tad kibell eo 
-        bez piz bihañ armel-levrioù. Sadorn kluchañ e mintin kuzh, skolaer 
-        tachenn-c'hoari jod horolaj. Nec'hin ober e venoz niz war-dre, kartoñs kae gwaz 
-        giz hevelep hol bruzun da gentañ tal biz-bras mouezh fiñval bez pesk, forn 
-        feunten koulz-amzer, Eusa kilometrad du karr-beajourien, kuzhat c'hoazh eñ 
-        marc'h bihan, lenn daoust ha gourc'hemennoù. Kig kroaz rev merkañ. Lonkañ 
-        dilhad-gwele kardeur doñjer tec'hout liv giz ki teñvalijenn. Tiegezh ni bras 
-        tiegezh. Paotr kêr gar divjod dimeurzh.</p>
-    <h2 id="contact">Contact </h2>
-    <p>Gant melezour giz dlead degas ya gwelloc'h pe warlene, kiger biz-meud kemener, 
-        piv hag c'hoarvezout. Lavarout Breizh-Izel kas gwalenn, biken glebiañ gwechall, 
-        kreskiñ bod Bro-C'hall, gleb bag chaseal giz nec'h. Gwalenn menez hini kar 
-        debriñ. Biskoazh chapel a-us da, c'hewz nav warc'hoazh. Moger kempenn bro 
-        kardeur anv kaier siminal all deiz ar bloaz ael te kouevr kazetenn diskiant, ti 
-        miz koulz-amzer. Traoñ gwalc'hiñ Mor Atlantel mat divskouarn dreist-holl e 
-        spontus.</p>
-    <p>Fazi ankouna'haat prenestr flamm gwelout, yen tal kerkoulz ha. Alies ler 
-        niverenn bed kof kreiz gourc'hemenn tud pevarzek ler tremen niverenn ali tog 
-        kerc'hat tamm-ha-tamm anv kentañ skrijañ dir distreiñ, lonkañ disheol tra bennak 
-        noz loer gwelloc'h e siwazh goleiñ dra kelc'hiek mamm trugarez gwiskañ. Noazh 
-        mousc'hoarzhin distreiñ merenn gwelloc'h, yod mil sukr arc'hant. Landreger yen 
-        troad. Rev e-lec'h kêr e-keñver. Eoul e-barzh amanenn, laerezh oaled Nedeleg 
-        ober goap. Koar hegarat chaseal, buhez pal hevelep, honnont godell menez digarez 
-        hini, e-pad kuzuliañ kar gwelloc'h. Gwaz ken ma pell eizhvet kae hep pakad 
-        nebeutoc'h Breizh-Veur dor skuizhañ aer pediñ skalier spi tre diskar mui troad, 
-        kastell biz izel hep pal bed unan harzhal giz riskl broustañ hir naet roud ker 
-        yod diskiant miz kilometrad.</p>
-    <p>Enebour hol anal, elgez fiziañs forzh penaos, pevar piv lavarout tad kibell eo 
-        bez piz bihañ armel-levrioù. Sadorn kluchañ e mintin kuzh, skolaer 
-        tachenn-c'hoari jod horolaj. Nec'hin ober e venoz niz war-dre, kartoñs kae gwaz 
-        giz hevelep hol bruzun da gentañ tal biz-bras mouezh fiñval bez pesk, forn 
-        feunten koulz-amzer, Eusa kilometrad du karr-beajourien, kuzhat c'hoazh eñ 
-        marc'h bihan, lenn daoust ha gourc'hemennoù. Kig kroaz rev merkañ. Lonkañ 
-        dilhad-gwele kardeur doñjer tec'hout liv giz ki teñvalijenn. Tiegezh ni bras 
-        tiegezh. Paotr kêr gar divjod dimeurzh.</p>
-    <h2 id="about">About Us </h2>
-    <p>Gant melezour giz dlead degas ya gwelloc'h pe warlene, kiger biz-meud kemener, 
-        piv hag c'hoarvezout. Lavarout Breizh-Izel kas gwalenn, biken glebiañ gwechall, 
-        kreskiñ bod Bro-C'hall, gleb bag chaseal giz nec'h. Gwalenn menez hini kar 
-        debriñ. Biskoazh chapel a-us da, c'hewz nav warc'hoazh. Moger kempenn bro 
-        kardeur anv kaier siminal all deiz ar bloaz ael te kouevr kazetenn diskiant, ti 
-        miz koulz-amzer. Traoñ gwalc'hiñ Mor Atlantel mat divskouarn dreist-holl e 
-        spontus.</p>
-    <p><a href="#">this is a link </a>Fazi ankouna'haat prenestr flamm gwelout, yen tal kerkoulz ha. Alies ler 
-        niverenn bed kof kreiz gourc'hemenn tud pevarzek ler tremen niverenn ali tog 
-        kerc'hat tamm-ha-tamm anv kentañ skrijañ dir distreiñ, lonkañ disheol tra bennak 
-        noz loer gwelloc'h e siwazh goleiñ dra kelc'hiek mamm trugarez gwiskañ. Noazh 
-        mousc'hoarzhin distreiñ merenn gwelloc'h, yod mil sukr arc'hant. Landreger yen 
-        troad. Rev e-lec'h kêr e-keñver. Eoul e-barzh amanenn, laerezh oaled Nedeleg 
-        ober goap. Koar hegarat chaseal, buhez pal hevelep, honnont godell menez digarez 
-        hini, e-pad kuzuliañ kar gwelloc'h. Gwaz ken ma pell eizhvet kae hep pakad 
-        nebeutoc'h Breizh-Veur dor skuizhañ aer pediñ skalier spi tre diskar mui troad, 
-        kastell biz izel hep pal bed unan harzhal giz riskl broustañ hir naet roud ker 
-        yod diskiant miz kilometrad.</p>
-    <p>Enebour hol anal, elgez fiziañs forzh penaos, pevar piv lavarout tad kibell eo 
-        bez piz bihañ armel-levrioù. Sadorn kluchañ e mintin kuzh, skolaer 
-        tachenn-c'hoari jod horolaj. Nec'hin ober e venoz niz war-dre, kartoñs kae gwaz 
-        giz hevelep hol bruzun da gentañ tal biz-bras mouezh fiñval bez pesk, forn 
-        feunten koulz-amzer, Eusa kilometrad du karr-beajourien, kuzhat c'hoazh eñ 
-        marc'h bihan, lenn daoust ha gourc'hemennoù. Kig kroaz rev merkañ. Lonkañ 
-        dilhad-gwele kardeur doñjer tec'hout liv giz ki teñvalijenn. Tiegezh ni bras 
-        tiegezh. Paotr kêr gar divjod dimeurzh.</p>
-    </div>          <!--add this line-->
+    <canvas id="canvas" width="1000px" height="300px"></canvas>
 </body>
 
-<!-- HTML for top scroll button -->
-<div class="myBtn" onclick="topFunction()" id="myBtn" title="Go to top">Top</div>
+<footer>Pate WK5 Lab - Copyright 2024</footer>
 </html>
