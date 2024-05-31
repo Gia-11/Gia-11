@@ -308,7 +308,45 @@
             border-radius: 10px; 
         }
     </style>
+
+<script>
+    window.onload = function() {
+        var canvas = document.querySelector("#canvas");
+        var ctx = canvas.getContext('2d');
+        //Rectangle with gradient
+    ctx.beginPath();
+ 
+ // Create gradient
+ var grd = ctx.createLinearGradient(0, 0, 1000, 300);
+ grd.addColorStop(0, "#ffffff");
+ grd.addColorStop(1, "#a3c2c2");
+
+ // Fill with gradient
+ ctx.fillStyle = grd;
+ ctx.fillRect(0, 0, 1000, 300);
+
+ // Drawing the Text
+ ctx.font = 'italic 48px arial';
+ ctx.fillStyle = "rgba(50,50,50, 0.5)";
+ ctx.fillText('The Steeds of Rivendell', 203, 152);
+ ctx.fillStyle = "#669966";
+ ctx.fillText('The Steeds of Rivendell', 200, 150);                  
+ 
+ ctx.save();
+ ctx.translate(920,70);
+ ctx.rotate(Math.PI / 2);
+ ctx.font = 'bold 38px arial';
+ ctx.textAlign = "left";
+ ctx.fillStyle = "rgba(60,60,60, 0.8)";
+ ctx.fillText("Ride On!", -2, -2);
+ ctx.fillStyle = "#ffffff";
+ ctx.fillText("Ride On!", 0, 0);
+ ctx.restore(); 
+    }
+</script>
 </head>
 <body>
     <canvas id="canvas" width="1000px" height="300px"></canvas>
 </body>
+
+<footer>Pate WK5 Lab - Copyright 2024</footer>
