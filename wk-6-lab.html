@@ -181,7 +181,43 @@ canvas.addEventListener("mousedown", handleClick, false);
         
         function handleClick(e) {   
     alert("MOUSE DOWN"); // this just for testing
+
+    var mousePos = getMousePos(canvas, e);
+    var mouseX = mousePos.x;
+    var mouseY = mousePos.y;
+    for (var i = 0; i < balls.length; i++) {
+        var bxl = balls[i].x - balls[i].radius;
+        var bxr = balls[i].x + balls[i].radius;
+        var byt = balls[i].y - balls[i].radius;
+        var byb = balls[i].y + balls[i].radius;
+        if ((mouseX >= bxl && mouseX <= bxr) && (mouseY >= byt && mouseY <= byb)) {
+            //TEST -- are we inside?
+            console.log("Clicked inside ball " + i);
+            
+        } // end if
+    } // end for
 }//end window onload
+
+function getMousePos(canvas, evt) {
+    // get canvas position
+    var obj = canvas;
+    var top = 0;
+    var left = 0;
+    if ( obj.tagName != 'BODY' ) {
+        top += obj.offsetTop;
+        left += obj.offsetLeft;
+        obj = obj.offsetParent;
+    }
+ 
+    // return relative mouse position
+    var mouseX = evt.clientX - left + window.pageXOffset;
+    var mouseY = evt.clientY - top + window.pageYOffset;
+    return {
+        x: mouseX,
+        y: mouseY
+    };
+} //end function
+
 
 
     </script>
