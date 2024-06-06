@@ -43,6 +43,10 @@
             var minVelocity = 1;
             var maxRadius = 25;
             var minRadius = 15;
+
+            // Capture mouse click
+canvas.addEventListener("mousedown", handleClick, false);
+
             
             //*************************//
             //***** Class for Ball ****//
@@ -173,7 +177,12 @@
             } //end function
 
 
-        } //end window onload
+        } 
+        
+        function handleClick(e) {   
+    alert("MOUSE DOWN"); // this just for testing
+}//end window onload
+
 
     </script>
 </head>
