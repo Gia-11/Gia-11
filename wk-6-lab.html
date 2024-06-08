@@ -135,24 +135,12 @@ var gOver = false;
             function gameLoop() {  
                 updateBalls();                          // add this line              
                 drawBalls();
+                if (!gOver) {
 
                 window.requestAnimationFrame(gameLoop); // add this line
             }
 
             startGame();
-
-            //*****************************//
-//******* New Game Loop *******//
-//*****************************//
-function gameLoop() {
- 
- updateBalls();
- drawBalls();
- if (!gOver) {
-     window.requestAnimationFrame(gameLoop);
- } else {
-     gameOver();
- }
 
 }
 
