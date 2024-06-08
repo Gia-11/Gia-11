@@ -24,8 +24,10 @@
         window.onload = function() {
 
             //******************//
-//***** Audio ******//
-//******************//
+           //***** Audio ******//
+          //******************//
+            var pop = document.createElement("AUDIO");
+            pop.setAttribute("src", "pop.wav");
 
 var pop = document.createElement("AUDIO");
 pop.setAttribute("src", "pop.wav");
@@ -50,12 +52,10 @@ pop.setAttribute("src", "pop.wav");
             var minVelocity = 1;
             var maxRadius = 25;
             var minRadius = 15;
+            var gOver = false;
 
             // Capture mouse click
-canvas.addEventListener("mousedown", handleClick, false);
-
-var gOver = false;
-
+            canvas.addEventListener("mousedown", handleClick, false);
             
             //*************************//
             //***** Class for Ball ****//
@@ -72,17 +72,17 @@ var gOver = false;
                 } //end constructor function
 
                 update() {
-    this.x += this.vX;
-    //test for collisions with left and right walls
-    if (this.x <= 0 + this.radius || this.x >= xLimit - this.radius) {
-        this.vX = -this.vX;
-    }
-    this.y += this.vY;
-    //test for collisions with top and bottom walls
-    if (this.y <= 0 + this.radius || this.y >= yLimit - this.radius) {
-        this.vY = -this.vY;
-    }
-}
+                    this.x += this.vX;
+                    //test for collisions with left and right walls
+                    if (this.x <= 0 + this.radius || this.x >= xLimit - this.radius) {
+                        this.vX = -this.vX;
+                    }
+                    this.y += this.vY;
+                    //test for collisions with top and bottom walls
+                    if (this.y <= 0 + this.radius || this.y >= yLimit - this.radius) {
+                        this.vY = -this.vY;
+                    }
+                }
                 
                 draw() {
 
@@ -96,15 +96,13 @@ var gOver = false;
                     ctx.stroke();
                 }
 
-
                 burst() {
                     //add sound effect below
-    pop.play();
-    this.radius = 0;
-}
+                    pop.play();
+                    this.radius = 0;
+                }
             } 
-            
-            //end class Ball    
+        }//end class Ball    
             
 
             //********************************//
@@ -124,26 +122,19 @@ var gOver = false;
                 }
             } //end function
 
-            function startGame() {
-                for (var i = 0; i < N; i++) {
-                    balls.push(new Ball(getX(), getY(), getRadius(), getXVel(), getYVel(), getColor()));
+            function gameLoop() {
 
-                }
-                window.requestAnimationFrame(gameLoop);
-            } // end function
-
-            function gameLoop() {  
-                updateBalls();                          // add this line              
-                drawBalls();
-                if (!gOver) {
-
-                window.requestAnimationFrame(gameLoop); // add this line
-            }
-
-            startGame();
+updateBalls();
+drawBalls();
+if (!gOver) {
+    window.requestAnimationFrame(gameLoop);
+} else {
+    gameOver();
+}
 
 }
 
+startGame();
 
             //*******************************************************//
             //****************** SUPPORT FUNCTIONS  *****************//
@@ -194,9 +185,6 @@ var gOver = false;
             function getYVel() {
                 return Math.floor(minVelocity + Math.random() * maxVelocity);
             } //end function
-
-
-        } 
         
         function handleClick(e) {   
     alert("MOUSE DOWN"); // this just for testing
@@ -221,7 +209,8 @@ var gOver = false;
             
         } // end if
     } // end for
-}
+} // end function
+
 //*************************************//
 //********* Handle Game Over **********//
 //*************************************//
@@ -234,29 +223,8 @@ function gameOver() {
     ctx.beginPath();
     ctx.fillStyle = "#f00";
     ctx.fillText("Score = " + N, (canvas.width / 2) - 90, (canvas.height / 2) + 30 );
-}//end window onload
-
-function getMousePos(canvas, evt) {
-    // get canvas position
-    var obj = canvas;
-    var top = 0;
-    var left = 0;
-    if ( obj.tagName != 'BODY' ) {
-        top += obj.offsetTop;
-        left += obj.offsetLeft;
-        obj = obj.offsetParent;
-    }
- 
-    // return relative mouse position
-    var mouseX = evt.clientX - left + window.pageXOffset;
-    var mouseY = evt.clientY - top + window.pageYOffset;
-    return {
-        x: mouseX,
-        y: mouseY
-    };
-} //end function
-
-
+}
+//end window onload
 
     </script>
 </head>
