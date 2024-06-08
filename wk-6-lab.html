@@ -22,6 +22,13 @@
     </style>
     <script>
         window.onload = function() {
+
+            //******************//
+//***** Audio ******//
+//******************//
+
+var pop = document.createElement("AUDIO");
+pop.setAttribute("src", "pop.wav");
             
             //*********************//
             //*** Canvas set up ***//
@@ -46,6 +53,8 @@
 
             // Capture mouse click
 canvas.addEventListener("mousedown", handleClick, false);
+
+var gOver = false;
 
             
             //*************************//
@@ -88,7 +97,14 @@ canvas.addEventListener("mousedown", handleClick, false);
                 }
 
 
-            } //end class Ball    
+                burst() {
+                    //add sound effect below
+    pop.play();
+    this.radius = 0;
+}
+            } 
+            
+            //end class Ball    
             
 
             //********************************//
@@ -192,7 +208,13 @@ canvas.addEventListener("mousedown", handleClick, false);
         var byb = balls[i].y + balls[i].radius;
         if ((mouseX >= bxl && mouseX <= bxr) && (mouseY >= byt && mouseY <= byb)) {
             //TEST -- are we inside?
-            console.log("Clicked inside ball " + i);
+            // console.log("Clicked inside ball " + i);
+            balls[i].burst();
+           balls.splice(i, 1);
+           N_remaining--;
+           if (N_remaining <= 0) {
+               gOver = true;
+           }
             
         } // end if
     } // end for
