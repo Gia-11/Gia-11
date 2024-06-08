@@ -141,6 +141,21 @@ var gOver = false;
 
             startGame();
 
+            //*****************************//
+//******* New Game Loop *******//
+//*****************************//
+function gameLoop() {
+ 
+ updateBalls();
+ drawBalls();
+ if (!gOver) {
+     window.requestAnimationFrame(gameLoop);
+ } else {
+     gameOver();
+ }
+
+}
+
 
             //*******************************************************//
             //****************** SUPPORT FUNCTIONS  *****************//
@@ -218,6 +233,19 @@ var gOver = false;
             
         } // end if
     } // end for
+}
+//*************************************//
+//********* Handle Game Over **********//
+//*************************************//
+function gameOver() {
+    ctx.beginPath();
+    ctx.font = "55px sans";               
+    ctx.fillStyle = "#009999";            
+    ctx.lineWidth= 0.25;
+    ctx.fillText("GAME OVER", (canvas.width / 2) - 150, (canvas.height / 2) - 20);
+    ctx.beginPath();
+    ctx.fillStyle = "#f00";
+    ctx.fillText("Score = " + N, (canvas.width / 2) - 90, (canvas.height / 2) + 30 );
 }//end window onload
 
 function getMousePos(canvas, evt) {
