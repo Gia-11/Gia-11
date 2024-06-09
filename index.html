@@ -1,105 +1,265 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-    <meta charset="UTF-8">
-    <title>Canvas Examples</title>
+    <title> Pate Week 6 Lab</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <style>
-        #canvas {            
-            border: 3px solid green;
-            border-radius: 10px; 
+        #cbg {
+            position: fixed;
+            z-index: 1;
+            border: 1px solid gray;
+            border-radius: 15px;
+            background-color: #ffccd9;
         }
-        footer {
-         background-color: green;
-         color: white;
-         text-align: center;
-         padding: 10px;
-         position: fixed;
-         bottom: 0;
-         width: 100%;
+
+        #canvas {
+            position: fixed;
+            z-index: 2;
+            border: 1px solid gray;
+            border-radius: 15px;
         }
     </style>
 
 <script>
     window.onload = function() {
-        var canvas = document.querySelector("#canvas");
-        var ctx = canvas.getContext('2d');
-        //Rectangle with gradient
-    ctx.beginPath();
- 
- // Create gradient
- var grd = ctx.createLinearGradient(0, 0, 1000, 300);
- grd.addColorStop(0, "#ffffff");
- grd.addColorStop(1, "#a3c2c2");
+        
+        //******************//
+        //***** Audio ******//
+        //******************//
+        
+        var pop = document.createElement("AUDIO");
+        pop.setAttribute("src", "pop.wav");
+        
+        //*********************//
+        //*** Canvas set up ***//
+        //*********************//
+        
+        var canvas = document.getElementById('canvas'),
+            ctx = canvas.getContext('2d');
+        
+        //*************************//
+        //*** Global variables ****//
+        //*************************//
+        
+        var N = 5; // starting number of balls
+        var N_remaining = N; // used to track reamining balls
+        var balls = [];
+        var xLimit = canvas.width;
+        var yLimit = canvas.height;
+        var maxVelocity = 2;
+        var minVelocity = 1;
+        var maxRadius = 25;
+        var minRadius = 15;
+        var gOver = false;
+        
+        // Capture mouse click ***Step 3***
+        canvas.addEventListener("mousedown", handleClick, false);
+        
+        //*************************//
+        //***** Class for Ball ****//
+        //*************************//
+        
+        class Ball {
+            constructor(x, y, radius, vX, vY, color) {
+                this.x = x;
+                this.y = y;
+                this.radius = radius;
+                this.vX = vX;
+                this.vY = vY;
+                this.color = color;
+            } //end constructor function
+            
+          
+            update() {
+                this.x += this.vX;
+                //test for collisions with left and right walls
+                if (this.x <= 0 + this.radius || this.x >= xLimit - this.radius) {
+                    this.vX = -this.vX;
+                }
+                this.y += this.vY;
+                //test for collisions with top and bottom walls
+                if (this.y <= 0 + this.radius || this.y >= yLimit - this.radius) {
+                    this.vY = -this.vY;
+                }
+            }
+            
+            draw() {
 
- // Fill with gradient
- ctx.fillStyle = grd;
- ctx.fillRect(0, 0, 1000, 300);
+                ctx.beginPath();
+                ctx.strokeStyle = "gray";
+                ctx.fillStyle = this.color;
+                ctx.shadowColor = "#000";
+                ctx.shadowBlur = 1;
+                ctx.arc(this.x, this.y, this.radius, 0, 2 * Math.PI)
+                ctx.fill();
+                ctx.stroke();
+            }
+            burst() {
+                //add sound effect
+                pop.play();
+                this.radius = 0;
+            }
 
-// Drawing the Image
- var img = new Image(400, 320);
-img.src = "images/horse.png";
-img.onload = function() {
-    ctx.beginPath();                              
-    ctx.drawImage(img, 0, -10);
-    ctx.drawImage(img, 350, 110, 200,175);                
-    ctx.drawImage(img, 500, 130, 200,175);                
-   
-}
+        } //end class Ball            
 
- // Drawing the Text
- ctx.font = 'italic 48px arial';
- ctx.fillStyle = "rgba(50,50,50, 0.5)";
- ctx.fillText('The Steeds of Rivendell', 203, 152);
- ctx.fillStyle = "#669966";
- ctx.fillText('The Steeds of Rivendell', 200, 150);                  
- 
- ctx.save();
- ctx.translate(920,70);
- ctx.rotate(Math.PI / 2);
- ctx.font = 'bold 38px arial';
- ctx.textAlign = "left";
- ctx.fillStyle = "rgba(60,60,60, 0.8)";
- ctx.fillText("Ride On!", -2, -2);
- ctx.fillStyle = "#ffffff";
- ctx.fillText("Ride On!", 0, 0);
- ctx.restore(); 
+        //********************************//
+        //******* Main Game Functions ****//
+        //********************************//
+                  
+         function updateBalls() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (var i = 0; i < N_remaining; i++) {
+                balls[i].update();
+            }
+        } 
+        
+        function drawBalls() {
+            for (var i = 0; i < N_remaining; i++) {
+                balls[i].draw();
+            }
+        } //end function
 
-     // Add Line Drawings
- var startX = 700;
- var startY = 45;
- 
-ctx.strokeStyle = "#ffffff";
- 
-ctx.beginPath();
-ctx.lineWidth = 3;
-ctx.moveTo(startX,startY);
-ctx.lineTo(startX - 50, startY + 30);
-ctx.stroke();
- 
-ctx.beginPath();
-ctx.moveTo(startX,startY);
-ctx.lineWidth = 5;
-ctx.lineTo(startX + 15, startY + 15);
-ctx.stroke();
- 
-ctx.beginPath();
-ctx.lineWidth = 3;
-ctx.moveTo(startX + 50,startY);
-ctx.lineTo(startX, startY + 30);
-ctx.stroke();
- 
-ctx.beginPath();        
-ctx.moveTo(startX + 50,startY);
-ctx.lineWidth = 5;
-ctx.lineTo(startX + 65, startY + 15);     
-ctx.stroke(); 
-    }
+        function startGame() {
+            for (var i = 0; i < N; i++) {
+                balls.push(new Ball(getX(), getY(), getRadius(), getXVel(), getYVel(), getColor()));
+
+            }
+            window.requestAnimationFrame(gameLoop);
+        } // end function
+
+        function gameLoop() {
+
+            updateBalls();
+            drawBalls();
+            if (!gOver) {
+                window.requestAnimationFrame(gameLoop);
+            } else {
+                gameOver();
+            }
+
+        }
+
+        startGame();
+
+        //*******************************************************//
+        //****************** SUPPORT FUNCTIONS  *****************//
+        //*******************************************************//
+
+        function getRadius() {
+            return Math.floor(minRadius + Math.random() * maxRadius);
+        } //end function
+
+        function getColor() {
+            var letters = '0123456789ABCDEF';
+            var color = '#';
+            for (var i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
+        } // end function
+
+        function getX() {
+            var temp = Math.floor(Math.random() * xLimit);
+
+            if (temp >= (xLimit - maxRadius)) {
+                temp -= maxRadius;
+            }
+            if (temp <= (0 + maxRadius)) {
+                temp += maxRadius;
+            }
+            return temp;
+        } //end function
+
+        function getY() {
+            var temp = Math.floor(Math.random() * yLimit);
+
+            if (temp >= (yLimit - maxRadius)) {
+                temp -= maxRadius;
+            }
+            if (temp <= (0 + maxRadius)) {
+                temp += maxRadius;
+            }
+            return temp;
+
+        } //end function
+
+        function getXVel() {
+            return Math.floor(minVelocity + Math.random() * maxVelocity);
+        } //end function
+
+        function getYVel() {
+            return Math.floor(minVelocity + Math.random() * maxVelocity);
+        } //end function
+        
+         function handleClick(e) {   
+           //  alert("MOUSE DOWN");
+            var mousePos = getMousePos(canvas, e);
+            var mouseX = mousePos.x;
+            var mouseY = mousePos.y;
+            for (var i = 0; i < balls.length; i++) {
+                var bxl = balls[i].x - balls[i].radius;
+                var bxr = balls[i].x + balls[i].radius;
+                var byt = balls[i].y - balls[i].radius;
+                var byb = balls[i].y + balls[i].radius;
+                if ((mouseX >= bxl && mouseX <= bxr) && (mouseY >= byt && mouseY <= byb)) {
+                    //touching 
+                    //console.log("Clicked inside ball " + i);
+                   balls[i].burst();
+                   balls.splice(i, 1);
+                   N_remaining--;
+                   if (N_remaining <= 0) {
+                       gOver = true;
+                   }
+                } //end if
+            }
+        } //end function
+        
+        function getMousePos(canvas, evt) {
+            // get canvas position
+            var obj = canvas;
+            var top = 0;
+            var left = 0;
+            while (obj.tagName != 'BODY') {
+                top += obj.offsetTop;
+                left += obj.offsetLeft;
+                obj = obj.offsetParent;
+            }
+
+            // return relative mouse position
+            var mouseX = evt.clientX - left + window.pageXOffset;
+            var mouseY = evt.clientY - top + window.pageYOffset;
+            return {
+                x: mouseX,
+                y: mouseY
+            };
+        } //end function
+        
+        //*************************************//
+        //********* Handle Game Over **********//
+        //*************************************//
+        function gameOver() {
+            ctx.beginPath();
+            ctx.font = "55px sans";               
+            ctx.fillStyle = "#009999";            
+            ctx.lineWidth= 0.25;
+            ctx.fillText("GAME OVER", (canvas.width / 2) - 150, (canvas.height / 2) - 20);
+            ctx.beginPath();
+            ctx.fillStyle = "#f00";
+            ctx.fillText("Score = " + N, (canvas.width / 2) - 90, (canvas.height / 2) + 30 );
+        }
+        
+    } //end window onload
+
 </script>
 </head>
+
 <body>
-    <canvas id="canvas" width="1000px" height="300px"></canvas>
+
+    <canvas id="cbg" width="640px" height="350px"></canvas>
+    <canvas id="canvas" width="640px" height="350px"></canvas>
+
+
 </body>
 
-<footer>Pate WK5 Lab - Copyright 2024</footer>
 </html>
